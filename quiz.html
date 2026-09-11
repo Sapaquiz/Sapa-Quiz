@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BIT English Model Questions</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    margin: 0;
+    padding: 15px;
+    color: #222;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+}
+
+h1 {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+#score {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+}
+
+.question {
+    background: #f8fafc;
+    padding: 18px;
+    margin-bottom: 20px;
+    border-radius: 13px;
+    border: 1px solid #e2e8f0;
+}
+
+.question-text {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: white;
+    border: 2px solid #d1d5db;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.option:hover {
+    background: #eef4ff;
+    border-color: #4285f4;
+}
+
+.option.correct {
+    background: #b9f6c0;
+    border-color: #16a34a;
+    color: #12651d;
+}
+
+.option.wrong {
+    background: #ffb8b8;
+    border-color: #dc2626;
+    color: #8b0000;
+}
+
+.option.disabled {
+    cursor: default;
+}
+
+.option.disabled:hover {
+    background: inherit;
+}
+
+.option.correct:hover {
+    background: #b9f6c0;
+}
+
+.option.wrong:hover {
+    background: #ffb8b8;
+}
+
+.explanation {
+    margin-top: 14px;
+    padding: 14px;
+    background: #eef4ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 8px;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.correct-title {
+    color: #15803d;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.wrong-title {
+    color: #dc2626;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.final-result {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    background: #eef4ff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #1769e0;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0d55bd;
+}
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 8px;
+    }
+
+    .container {
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 21px;
+    }
+
+    .question {
+        padding: 14px;
+    }
+
+    .option {
+        font-size: 14px;
+        padding: 11px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>BIT English Model Questions</h1>
+
+<div class="subtitle">
+    Multiple Choice Quiz — 40 Questions
+</div>
+
+<div id="score">
+    Score: 0 / 40 &nbsp; | &nbsp; Answered: 0 / 40
+</div>
+
+<div id="quiz"></div>
+
+<div id="finalResult"></div>
+
+<button onclick="resetQuiz()">Reset Quiz</button>
+
+</div>
+
+<script>
+
+const questions = [
+
+{
+    q: "I like ............... in my spare time.",
+    options: ["reading", "read", "to read", "to reading"],
+    answer: 0,
+    explanation: "After 'like', a gerund (-ing form) is commonly used. Therefore, 'I like reading' is correct."
+},
+
+{
+    q: "I went to the bookshop ............... 'Harry Potter'.",
+    options: ["For buying", "to buy", "to buying", "for to buy"],
+    answer: 1,
+    explanation: "'To buy' expresses the purpose of going somewhere. The correct sentence is 'I went to the bookshop to buy Harry Potter.'"
+},
+
+{
+    q: "He is interested ...... learning Romanian.",
+    options: ["in", "on", "to", "for"],
+    answer: 0,
+    explanation: "The adjective 'interested' is followed by the preposition 'in'. We say 'interested in learning.'"
+},
+
+{
+    q: "Would you like ............... to drink, Sir?",
+    options: ["anything", "anywhere", "nothing", "something"],
+    answer: 3,
+    explanation: "'Something' is commonly used in offers such as 'Would you like something to drink?'"
+},
+
+{
+    q: "What ............... next weekend?",
+    options: ["do you do", "are you doing", "will you do", "did you do"],
+    answer: 2,
+    explanation: "'Will you do' asks about a future action. 'What will you do next weekend?' is grammatically correct."
+},
+
+{
+    q: "How many students in your class ............... from Bangladesh?",
+    options: ["comes", "come", "came", "are coming"],
+    answer: 1,
+    explanation: "'Students' is plural, so the plural verb 'come' is needed."
+},
+
+{
+    q: "I am hungry. I want two ............... of chicken.",
+    options: ["plates", "pieces", "bowls", "gasses"],
+    answer: 1,
+    explanation: "Chicken can be counted as individual pieces, so 'two pieces of chicken' is the natural expression."
+},
+
+{
+    q: "They are ugly and expensive; ............... people buy them.",
+    options: ["though", "yet", "still", "besides"],
+    answer: 1,
+    explanation: "'Yet' expresses contrast. Although they are ugly and expensive, people buy them."
+},
+
+{
+    q: "What time ...............?",
+    options: ["the train leaves", "leaves the train", "is the train leaving", "does the train leave"],
+    answer: 0,
+    explanation: "This is an indirect question. After 'What time', the word order is 'the train leaves.'"
+},
+
+{
+    q: "I promise I ............... study harder.",
+    options: ["will", "am going to", "may", "must"],
+    answer: 0,
+    explanation: "'Will' is commonly used when making a promise about the future: 'I promise I will study harder.'"
+},
+
+{
+    q: "How long ............... English?",
+    options: ["are you learning", "have you been learning", "do you learn", "you learn"],
+    answer: 1,
+    explanation: "The present perfect continuous 'have you been learning' is used for an activity that began in the past and continues to the present."
+},
+
+{
+    q: "I hope that a school ............... for village children.",
+    options: ["opens", "is opened", "has to be opened", "be opened"],
+    answer: 1,
+    explanation: "'Is opened' is passive voice because the school receives the action of being opened."
+},
+
+{
+    q: "Closest similar meaning of the word 'compunction' is:",
+    options: ["remorse", "merciful", "connive", "recklessness"],
+    answer: 0,
+    explanation: "'Compunction' means a feeling of guilt or regret about doing something wrong. 'Remorse' has a similar meaning."
+},
+
+{
+    q: "Closest similar meaning of the word 'demolish' is:",
+    options: ["repair", "humiliate", "destroy", "conserve"],
+    answer: 2,
+    explanation: "'Demolish' means to destroy or tear down something, especially a building."
+},
+
+{
+    q: "Closest similar meaning of the word 'beneficent' is:",
+    options: ["charitable", "imagery", "profitable", "cost-effective"],
+    answer: 0,
+    explanation: "'Beneficent' means doing or producing good, especially by helping others. 'Charitable' is the closest choice."
+},
+
+{
+    q: "Closest similar meaning of the word 'mendacity' is:",
+    options: ["mandatory", "untruthfulness", "veracity", "potential"],
+    answer: 1,
+    explanation: "'Mendacity' means dishonesty or a tendency to lie. Therefore, 'untruthfulness' is correct."
+},
+
+{
+    q: "Closest opposite meaning of the word 'theocracy' is:",
+    options: ["hierocracy", "ideology", "conservative", "church state"],
+    answer: 3,
+    explanation: "'Theocracy' refers to government by religious authority. Among the choices, 'church state' is the intended opposite choice in the provided question."
+},
+
+{
+    q: "Closest opposite meaning of the word 'integrate' is:",
+    options: ["accommodate", "compose", "articulate", "segregate"],
+    answer: 3,
+    explanation: "'Integrate' means to combine or bring together. 'Segregate' means to separate, making it the opposite."
+},
+
+{
+    q: "Closest opposite meaning of the word 'Calm' is:",
+    options: ["excited", "restful", "cool", "serene"],
+    answer: 0,
+    explanation: "'Calm' means peaceful or not excited. Therefore, 'excited' is its opposite."
+},
+
+{
+    q: "Closest opposite meaning of the word 'wordy' is:",
+    options: ["rambling", "concise", "diffuse", "voluble"],
+    answer: 1,
+    explanation: "'Wordy' means using too many words. 'Concise' means using few words while expressing an idea clearly."
+},
+
+{
+    q: "A teacher needs to discuss in classes, it ............... curiosity in students.",
+    options: ["creates", "created", "create", "will creates"],
+    answer: 0,
+    explanation: "The subject 'it' is singular, so the present-tense verb should be 'creates'."
+},
+
+{
+    q: "Successful people always ............... two things, one determination and second, sincerity.",
+    options: ["had", "doing", "did", "have"],
+    answer: 3,
+    explanation: "'Successful people' is plural, so 'have' is the correct present-tense verb."
+},
+
+{
+    q: "They like swimming, whenever they have leisure time. Which word is a verbal noun?",
+    options: ["Leisure", "free", "like", "swimming"],
+    answer: 3,
+    explanation: "'Swimming' is a gerund, which is an -ing verb form functioning as a noun. Therefore, it is a verbal noun."
+},
+
+{
+    q: "Nobody likes heap of garbage in front of his house. Which word is a collective noun?",
+    options: ["a heap of garbage", "in front", "house", "likes"],
+    answer: 0,
+    explanation: "'Heap' refers to a collection or group of things. Therefore, 'a heap of garbage' is the collective noun phrase."
+},
+
+{
+    q: "Find interrogative pronoun in the sentence: 'Why did you not call me? This made me alarmed.'",
+    options: ["you", "me", "why", "did"],
+    answer: 2,
+    explanation: "'Why' is an interrogative word because it asks about the reason for an action."
+},
+
+{
+    q: "Right grammatical category of the underlined phrase in the sentence 'Ram handed a book to his sister' is:",
+    options: ["complement", "direct object", "adjunct", "indirect object"],
+    answer: 3,
+    explanation: "'To his sister' identifies the person who receives the book, so it functions as the indirect object."
+},
+
+{
+    q: "Which of the following is noun?",
+    options: ["real", "readable", "reliable", "reality"],
+    answer: 3,
+    explanation: "'Reality' is a noun. 'Real', 'readable', and 'reliable' are adjectives."
+},
+
+{
+    q: "English is today the third ............... native language worldwide after Chinese and Hindi, with some 380 million native speakers.",
+    options: ["the most spoken", "the more spoken", "much spoken", "most spoken"],
+    answer: 3,
+    explanation: "'Most spoken' is the superlative form used to describe the ranking of English among the languages mentioned."
+},
+
+{
+    q: "We could barely get any information at the airport. ............... people seemed to have ............... idea about it.",
+    options: ["Many / any", "A lot of / any", "Few / no", "Only a few / some"],
+    answer: 2,
+    explanation: "'Few people' means not many people, while 'no idea' means having zero knowledge. Therefore, 'Few / no' fits the sentence."
+},
+
+{
+    q: "............... his friends speaks any English.",
+    options: ["Some", "All", "Many", "Neither of"],
+    answer: 3,
+    explanation: "'Neither of his friends' refers to two people and means not one of them. 'Speaks' is singular because 'neither' is treated as singular."
+},
+
+{
+    q: "These differences between two photographs ............... with the help of Photoshop.",
+    options: ["should remove", "have to remove", "could have been removed", "must have removed"],
+    answer: 2,
+    explanation: "'Could have been removed' is a past possibility in the passive voice. The photographs receive the action of being edited."
+},
+
+{
+    q: "New legislation ............... in Congress but it ............... by many.",
+    options: [
+        "was introduced / wasn't accept",
+        "was introduced / didn't accept",
+        "is introduced / won't accept",
+        "introduced / hadn't been accepted"
+    ],
+    answer: 1,
+    explanation: "The intended structure is passive: 'New legislation was introduced in Congress but it wasn't accepted by many.' The legislation receives both actions."
+},
+
+{
+    q: "Mike has been told he will have to pay the fine ---- his high rank in the military.",
+    options: ["even if", "furthermore", "despite", "on purpose that"],
+    answer: 2,
+    explanation: "'Despite' means 'in spite of'. It shows that his high rank did not prevent him from having to pay the fine."
+},
+
+{
+    q: "The economy in China is booming; ............... many foreign investors are planning to enter China's market.",
+    options: ["Nonetheless", "so as to", "in addition to", "that's why"],
+    answer: 3,
+    explanation: "'That's why' introduces the result of the booming economy: many foreign investors are planning to enter the market."
+},
+
+{
+    q: "I wish you ............... making that noise. It's bothering me.",
+    options: ["would stop", "are going to stop", "stop", "can stop"],
+    answer: 0,
+    explanation: "'I wish you would stop' is used to express a desire for someone to change their current behavior."
+},
+
+{
+    q: "............... more help, I could call my neighbor.",
+    options: ["Needed", "Should I need", "I have needed", "I should need"],
+    answer: 1,
+    explanation: "'Should I need' is an inverted conditional meaning 'If I need'. The complete idea is 'If I should need more help, I could call my neighbor.'"
+},
+
+{
+    q: "If you plan to take a long trip in the car, you must get a full tank of gas or you ---- out of gas.",
+    options: ["have to run", "should have run", "had better run", "might run"],
+    answer: 3,
+    explanation: "'Might run out' expresses a possible future result. The car might run out of gas if the tank is not full."
+},
+
+{
+    q: "If you want to get a good night's sleep, you ---- any tea or coffee in the evenings.",
+    options: ["would rather drink", "don't have to drink", "mustn't drink", "not able to drink"],
+    answer: 0,
+    explanation: "The intended answer is 'would rather drink' based on the provided choices, although the sentence appears grammatically incomplete. A more natural sentence would be 'you shouldn't drink any tea or coffee in the evenings.'"
+},
+
+{
+    q: "It is not easy for many civil servants to ............... on their salaries as the inflation rate is extremely high.",
+    options: ["get by", "turn up", "wear out", "run over"],
+    answer: 0,
+    explanation: "'Get by' means to manage or survive with the money available. Therefore, 'get by on their salaries' is correct."
+},
+
+{
+    q: "I thought the party was going to be boring, but it ............... to be the most unforgettable evening of my life.",
+    options: ["turned out", "looked around", "passed away", "fell back on"],
+    answer: 0,
+    explanation: "'Turned out' means eventually proved to be or became. The party unexpectedly became an unforgettable evening."
+}
+
+];
+
+let score = 0;
+let answered = 0;
+
+
+/* =========================
+   LOAD QUIZ
+========================= */
+
+function loadQuiz() {
+
+    const quiz = document.getElementById("quiz");
+
+    quiz.innerHTML = "";
+
+    questions.forEach((question, index) => {
+
+        const questionBox = document.createElement("div");
+
+        questionBox.className = "question";
+
+        questionBox.dataset.index = index;
+
+        const questionText = document.createElement("div");
+
+        questionText.className = "question-text";
+
+        questionText.textContent =
+            (index + 1) + ". " + question.q;
+
+        questionBox.appendChild(questionText);
+
+
+        question.options.forEach((option, optionIndex) => {
+
+            const optionElement = document.createElement("div");
+
+            optionElement.className = "option";
+
+            optionElement.textContent =
+                String.fromCharCode(97 + optionIndex) +
+                ". " +
+                option;
+
+            optionElement.onclick = function() {
+
+                checkAnswer(
+                    optionElement,
+                    optionIndex,
+                    question.answer,
+                    questionBox,
+                    question.explanation
+                );
+
+            };
+
+            questionBox.appendChild(optionElement);
+
+        });
+
+        quiz.appendChild(questionBox);
+
+    });
+
+}
+
+
+/* =========================
+   CHECK ANSWER
+========================= */
+
+function checkAnswer(
+    selected,
+    selectedIndex,
+    correctIndex,
+    questionBox,
+    explanationText
+) {
+
+    // Prevent multiple answers
+    if (questionBox.dataset.answered === "true") {
+        return;
+    }
+
+    questionBox.dataset.answered = "true";
+
+    answered++;
+
+    const options =
+        questionBox.querySelectorAll(".option");
+
+
+    // Disable all choices
+    options.forEach(option => {
+
+        option.classList.add("disabled");
+
+    });
+
+
+    // Mark correct answer green
+    options[correctIndex].classList.add("correct");
+
+
+    if (selectedIndex === correctIndex) {
+
+        // Correct answer
+        score++;
+
+        const explanation =
+            document.createElement("div");
+
+        explanation.className = "explanation";
+
+        explanation.innerHTML = `
+            <div class="correct-title">
+                ✓ Correct!
+            </div>
+            <div>
+                ${explanationText}
+            </div>
+        `;
+
+        questionBox.appendChild(explanation);
+
+    }
+
+    else {
+
+        // Wrong answer
+        selected.classList.add("wrong");
+
+        const explanation =
+            document.createElement("div");
+
+        explanation.className = "explanation";
+
+        explanation.innerHTML = `
+            <div class="wrong-title">
+                ✗ Wrong!
+            </div>
+
+            <div>
+                <strong>Correct answer:</strong>
+                ${options[correctIndex].textContent}
+            </div>
+
+            <br>
+
+            <div>
+                <strong>Explanation:</strong><br>
+                ${explanationText}
+            </div>
+        `;
+
+        questionBox.appendChild(explanation);
+
+    }
+
+    updateScore();
+
+}
+
+
+/* =========================
+   UPDATE SCORE
+========================= */
+
+function updateScore() {
+
+    document.getElementById("score").innerHTML =
+        `Score: ${score} / ${questions.length}
+        &nbsp; | &nbsp;
+        Answered: ${answered} / ${questions.length}`;
+
+
+    // Show final result
+    if (answered === questions.length) {
+
+        const percentage =
+            Math.round((score / questions.length) * 100);
+
+        let message = "";
+
+        if (percentage >= 90) {
+            message = "Excellent! 🎉";
+        }
+
+        else if (percentage >= 75) {
+            message = "Very good! 👍";
+        }
+
+        else if (percentage >= 60) {
+            message = "Good job! Keep studying. 📚";
+        }
+
+        else {
+            message = "Keep practicing! You can improve. 💪";
+        }
+
+
+        document.getElementById("finalResult").innerHTML = `
+            <div class="final-result">
+
+                Final Score: ${score} / ${questions.length}
+
+                <br>
+
+                Percentage: ${percentage}%
+
+                <br><br>
+
+                ${message}
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   RESET QUIZ
+========================= */
+
+function resetQuiz() {
+
+    score = 0;
+
+    answered = 0;
+
+    document.getElementById("finalResult").innerHTML = "";
+
+    updateScore();
+
+    loadQuiz();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =========================
+   START QUIZ
+========================= */
+
+loadQuiz();
+
+</script>
+
+</body>
+</html>
